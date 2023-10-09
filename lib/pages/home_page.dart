@@ -1,4 +1,5 @@
 import 'package:fb_auth_bloc/blocs/auth/auth_bloc.dart';
+import 'package:fb_auth_bloc/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,6 +21,17 @@ class _HomePageState extends State<HomePage> {
           automaticallyImplyLeading: false,
           title: Text('Home'),
           actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return ProfilePage();
+                  }),
+                );
+              },
+              icon: Icon(Icons.account_circle),
+            ),
             IconButton(
               onPressed: () {
                 context.read<AuthBloc>().add(SignoutRequestedEvent());

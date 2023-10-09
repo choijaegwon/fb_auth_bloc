@@ -21,7 +21,13 @@ class _SplashPageState extends State<SplashPage> {
       listener: (context, state) {
         log('listener: $state');
         if (state.authStatus == AuthStatus.unauthenticated) {
-          Navigator.pushNamed(context, SigninPage.routeName);
+          Navigator.pushNamedAndRemoveUntil(context, SigninPage.routeName,
+              (route) {
+            // 모든 스택 라우터 제거
+            return route.settings.name == ModalRoute.of(context)!.settings.name
+                ? true
+                : false;
+          });
         } else if (state.authStatus == AuthStatus.authenticated) {
           Navigator.pushNamed(context, HomePage.routeName);
         }
